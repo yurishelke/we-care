@@ -1,49 +1,36 @@
-import { STATS, TRUST_STANDARDS } from "@/lib/content";
-import { TRUST_ICONS } from "./icons";
+import { PROMISES, PROMISE_TITLE } from "@/lib/content";
+import { PROMISE_ICONS } from "./icons";
 import Reveal from "./Reveal";
 
-const TONES = ["green", "peach", "blue", "yellow"] as const;
+/* "What you can count on" — the plan's five promise rows, editorial
+   layout (title left, body right). Replaces the unverifiable
+   "police-verified / door-PIN" standards and the fake stats band. */
 
 export default function Trust() {
   return (
-    <section className="wc-sec" id="trust">
+    <section className="wc-sec" id="promise">
       <div className="wc-container">
-        <Reveal className="wc-head">
-          <span className="wc-kicker">Trust &amp; safety</span>
-          <h2 className="wc-h2">Verified at every step, not just promised.</h2>
-          <p className="wc-sub">
-            Four non-negotiable standards stand between your parent and
-            every companion we send.
-          </p>
+        <Reveal className="wc-head left">
+          <span className="wc-kicker">Our promise</span>
+          <h2 className="wc-h2">{PROMISE_TITLE}</h2>
         </Reveal>
 
-        <div className="wc-trust-grid">
-          {TRUST_STANDARDS.map((s, i) => {
-            const Ico = TRUST_ICONS[s.icon];
+        <div className="wc-promises">
+          {PROMISES.map((p, i) => {
+            const Ico = PROMISE_ICONS[p.icon];
             return (
-              <Reveal
-                key={s.title}
-                delay={i * 100}
-                className={`wc-trust-card t-${TONES[i]}`}
-              >
-                <span className="wc-ico-tile">
-                  <Ico size={24} />
-                </span>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
+              <Reveal key={p.title} delay={i * 70} className="wc-promise">
+                <div className="wc-promise-head">
+                  <span className="wc-ico-tile">
+                    <Ico size={20} />
+                  </span>
+                  <h3>{p.title}</h3>
+                </div>
+                <p>{p.body}</p>
               </Reveal>
             );
           })}
         </div>
-
-        <Reveal delay={150} className="wc-stats">
-          {STATS.map((s) => (
-            <div key={s.label} className="wc-stat">
-              <b>{s.value}</b>
-              <span>{s.label}</span>
-            </div>
-          ))}
-        </Reveal>
       </div>
     </section>
   );

@@ -36,6 +36,12 @@ export const CheckCircle = (p: P) => (
   </svg>
 );
 
+export const Close = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </svg>
+);
+
 export const WhatsApp = (p: P) => (
   <svg {...base(p)} strokeWidth={1.8}>
     <path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z" />
@@ -181,10 +187,65 @@ export const Sparkle = (p: P) => (
   </svg>
 );
 
+/* care-services icon set — stroke paths taken from plan.mhtml */
+
+export const Compass = (p: P) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" />
+  </svg>
+);
+
+export const Pill = (p: P) => (
+  <svg {...base(p)}>
+    <rect x="4" y="9" width="16" height="6" rx="3" transform="rotate(-45 12 12)" />
+    <path d="M8.7 8.7l6.6 6.6" />
+  </svg>
+);
+
+export const Briefcase = (p: P) => (
+  <svg {...base(p)}>
+    <rect x="4" y="7" width="16" height="12" rx="2" />
+    <path d="M9 7V5h6v2M4 12h16" />
+  </svg>
+);
+
+export const Person = (p: P) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="8" r="3.5" />
+    <path d="M5 20c0-4 3-6 7-6s7 2 7 6" />
+  </svg>
+);
+
+export const Chat = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M4 5h16v11H9.5L4 20V5z" />
+    <path d="M8 9.5h8M8 12.5h5" />
+  </svg>
+);
+
+export const Alert = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M12 3l9 16H3z" />
+    <path d="M12 10v4M12 16.5v.5" />
+  </svg>
+);
+
 export const SERVICE_ICONS = {
   hospital: Hospital,
   home: HomeIcon,
   bank: Bank,
+} as const;
+
+export const CARE_ICONS = {
+  compass: Compass,
+  pill: Pill,
+  briefcase: Briefcase,
+  home: HomeIcon,
+  person: Person,
+  chat: Chat,
+  video: Video,
+  alert: Alert,
 } as const;
 
 export const TRUST_ICONS = {
@@ -192,6 +253,14 @@ export const TRUST_ICONS = {
   heart: Heart,
   lock: Lock,
   note: NoteIcon,
+} as const;
+
+export const PROMISE_ICONS = {
+  accountable: Calendar,
+  familiar: Users,
+  transparent: CheckCircle,
+  report: NoteIcon,
+  private: Lock,
 } as const;
 
 export const BADGE_ICONS = {

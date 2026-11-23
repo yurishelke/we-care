@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FAQS, waLink } from "@/lib/content";
+import { FAQS, consultLink } from "@/lib/content";
 import { Chevron, WhatsApp } from "./icons";
 import Reveal from "./Reveal";
 
@@ -23,13 +23,13 @@ export default function Faq() {
             <div className="wc-faq-cta">
               <a
                 className="wc-btn sm"
-                href={waLink("Hi We Care, I have a question about your eldercare companion service.")}
+                href={consultLink("I have a question about your eldercare companion service.")}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <WhatsApp size={16} /> Ask on WhatsApp
+                <WhatsApp size={16} /> Book Free Consultation
               </a>
-              <span>We reply within minutes.</span>
+              <span>We reply the same day.</span>
             </div>
           </Reveal>
 

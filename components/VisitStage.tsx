@@ -2,42 +2,41 @@
 
 import { useEffect, useState } from "react";
 import { VISIT_DEMO } from "@/lib/content";
-import { Lock, NoteIcon, Users, Verified, Video, Vitals, Pin } from "./icons";
+import { HandHeart, NoteIcon, Pin, Users, Video } from "./icons";
 
-const PHASES = ["asking", "accepted", "door", "note"] as const;
+/* "A week of care" — an emotional vignette, not a process replay.
+   No door PIN, no step track: the full flow lives only in How it works.
+   Same auto-cycle cadence the hero animation had, new content. */
+
+const PHASES = ["meeting", "together", "report", "atEase"] as const;
 type Phase = (typeof PHASES)[number];
 
 const PHASE_META: Record<
   Phase,
-  { tone: string; label: string; sub: string; icon: typeof Users }
+  { tone: string; label: string; icon: typeof Users }
 > = {
-  asking: {
+  meeting: {
+    tone: "peach",
+    label: "A familiar face",
+    icon: HandHeart,
+  },
+  together: {
     tone: "green",
-    label: "Asking companions",
-    sub: "Every one free nearby, at once",
+    label: "Time together",
     icon: Users,
   },
-  accepted: {
-    tone: "blue",
-    label: "Accepted",
-    sub: "Verified · 1.4 km away",
-    icon: Verified,
-  },
-  door: {
-    tone: "peach",
-    label: "At the door",
-    sub: "PIN matched",
-    icon: Lock,
-  },
-  note: {
+  report: {
     tone: "yellow",
-    label: "Visit note shared",
-    sub: "On your phone, same day",
+    label: "Told, the same day",
     icon: NoteIcon,
+  },
+  atEase: {
+    tone: "blue",
+    label: "Miles away, at ease",
+    icon: Video,
   },
 };
 
-const TRACK_LABELS = ["Asking", "Accepted", "At the door", "Note"];
 const PHASE_MS = 2800;
 
 export default function VisitStage() {
@@ -48,7 +47,7 @@ export default function VisitStage() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIdx(3); /* rest on the informative final state */
+      setIdx(3); /* rest on the reassuring final state */
       return;
     }
     const t = window.setInterval(() => {
@@ -60,13 +59,13 @@ export default function VisitStage() {
   return (
     <div className="wc-stage-wrap">
       <div className="wc-stage" data-phase={phase}>
-        {/* family watching from abroad */}
+        {/* family, connected from afar */}
         <div className="wc-stage-you">
           <span className="wc-stage-you-ico">
             <Video size={19} />
           </span>
           <span className="wc-stage-you-t">
-            <small>Watching live</small>
+            <small>Connected, from wherever you are</small>
             <b>{VISIT_DEMO.family}</b>
           </span>
           <span className="wc-stage-you-dot" />
@@ -82,76 +81,67 @@ export default function VisitStage() {
             </span>
           </p>
 
-          {/* vitals appear with the visit note */}
+          {/* quiet facts, appearing with the report phase */}
           <div className="wc-stage-vitals">
             <span className="wc-vital">
-              <Vitals size={15} /> {VISIT_DEMO.vitals}
+              <NoteIcon size={15} /> {VISIT_DEMO.reportLine}
             </span>
             <span className="wc-vital">
               <Pin size={15} /> {VISIT_DEMO.place}
             </span>
           </div>
 
-          {/* radar + companion avatar */}
+          {/* the companion at the centre; rings ripple as she arrives */}
           <div className="wc-stage-center">
             <span className="wc-stage-ring" />
             <span className="wc-stage-ring" />
             <span className="wc-stage-ring" />
             <div className="wc-stage-avatar">
               <b>{VISIT_DEMO.initials}</b>
-              <span className="wc-verified">
-                <Verified size={18} />
-              </span>
             </div>
           </div>
 
-          {/* phase: asking */}
-          <div className={`wc-stage-float wc-float-asking ${phase === "asking" ? "is-on" : ""}`}>
-            <small>Broadcast to every verified companion</small>
-            <b>Free nearby right now — at once</b>
+          {/* phase: meeting — a warm greeting at the door */}
+          <div
+            className={`wc-stage-float wc-float-meeting ${
+              phase === "meeting" ? "is-on" : ""
+            }`}
+          >
+            <small>At the door</small>
+            <b>{VISIT_DEMO.greeting}</b>
           </div>
 
-          {/* phase: accepted */}
-          <div className={`wc-stage-float wc-float-accepted ${phase === "accepted" ? "is-on" : ""}`}>
-            <small>{VISIT_DEMO.service} · with {VISIT_DEMO.parent}</small>
-            <b>{VISIT_DEMO.companion} · Verified</b>
+          {/* phase: together — company, not chores */}
+          <div
+            className={`wc-stage-float wc-float-together ${
+              phase === "together" ? "is-on" : ""
+            }`}
+          >
+            <small>This week, together</small>
+            <b>{VISIT_DEMO.together}</b>
           </div>
 
-          {/* phase: door PIN */}
-          <div className="wc-pinpad">
-            <small>Your mother reads out the PIN</small>
-            <div className="wc-pinpad-digits">
-              {VISIT_DEMO.pin.map((d, i) => (
-                <span key={i} style={{ ["--k" as string]: i }}>
-                  {d}
-                </span>
-              ))}
-            </div>
-            <span className="wc-pinpad-ok">
-              <Verified size={14} /> PIN matched. The right person is here.
-            </span>
-          </div>
-
-          {/* phase: note */}
-          <div className={`wc-stage-float wc-float-note ${phase === "note" ? "is-on" : ""}`}>
+          {/* phase: report — the written note the family reads */}
+          <div
+            className={`wc-stage-float wc-float-report ${
+              phase === "report" ? "is-on" : ""
+            }`}
+          >
             <span className="wc-note-head">
-              <NoteIcon size={16} /> Visit note · shared 8m ago
+              <NoteIcon size={16} /> Visit report · shared just now
             </span>
             <p>{VISIT_DEMO.note}</p>
           </div>
-        </div>
 
-        {/* journey progress */}
-        <div className="wc-stage-track" aria-hidden="true">
-          {TRACK_LABELS.map((label, i) => (
-            <span
-              key={label}
-              className={`wc-stage-step ${i < idx ? "is-done" : ""} ${i === idx ? "is-on" : ""}`}
-            >
-              <i key={`${label}-${i === idx ? idx : "x"}`} />
-              {label}
-            </span>
-          ))}
+          {/* phase: atEase — the feeling the brand sells */}
+          <div
+            className={`wc-stage-float wc-float-atease ${
+              phase === "atEase" ? "is-on" : ""
+            }`}
+          >
+            <small>And you, wherever you are</small>
+            <b>Miles away, never alone.</b>
+          </div>
         </div>
       </div>
     </div>

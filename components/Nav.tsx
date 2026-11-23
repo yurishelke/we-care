@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { NAV_LINKS, waLink } from "@/lib/content";
+import { NAV_LINKS, consultLink } from "@/lib/content";
+import { useBooking } from "./BookingContext";
 import { ArrowRight, HandHeart, WhatsApp } from "./icons";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -69,17 +71,16 @@ export default function Nav() {
           <div className="wc-nav-end">
             <a
               className="wc-nav-wa"
-              href={waLink()}
+              href={consultLink("I'd like to know more about caring for my parents.")}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Contact us on WhatsApp"
+              aria-label="Book Free Consultation on WhatsApp"
             >
               <WhatsApp size={19} />
-              <span className="hidden sm:inline">WhatsApp</span>
             </a>
-            <a className="wc-btn sm" href="#book">
-              Book a Visit
-            </a>
+            <button type="button" className="wc-btn sm" onClick={openBooking}>
+              Book your visit
+            </button>
             <button
               type="button"
               className="wc-burger"
@@ -108,24 +109,27 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href={waLink()}
+            href={consultLink("I'd like to know more about caring for my parents.")}
             target="_blank"
             rel="noopener noreferrer"
             style={{ ["--k" as string]: NAV_LINKS.length }}
             tabIndex={open ? 0 : -1}
             onClick={close}
           >
-            WhatsApp us
+            Book Free Consultation
           </a>
-          <a
+          <button
+            type="button"
             className="wc-btn lg wide"
-            href="#book"
             style={{ ["--k" as string]: NAV_LINKS.length + 1 }}
             tabIndex={open ? 0 : -1}
-            onClick={close}
+            onClick={() => {
+              close();
+              openBooking();
+            }}
           >
-            Book a Visit <ArrowRight size={18} className="wc-arrow" />
-          </a>
+            Book your visit <ArrowRight size={18} className="wc-arrow" />
+          </button>
         </nav>
       </div>
     </>

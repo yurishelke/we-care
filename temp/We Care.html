@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<title>We Care — Dedicated Eldercare &amp; Companion Support</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin:0; padding:0; scroll-behavior: smooth; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#fcf9f4",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#e1bfb1",
+            "on-primary": "#ffffff",
+            "inverse-on-surface": "#f3f0eb",
+            "surface-card": "#FFFFFF",
+            "on-primary-fixed-variant": "#274f37",
+            "outline": "#717972",
+            "tertiary-container": "#c0a972",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#795f53",
+            "secondary-container": "#ffdbcc",
+            "secondary": "#73594d",
+            "secondary-fixed": "#ffdbcc",
+            "tertiary-fixed-dim": "#ddc48b",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#554517",
+            "on-secondary-fixed-variant": "#594137",
+            "outline-variant": "#c1c8c0",
+            "on-primary-container": "#afdcbc",
+            "primary": "#224a33",
+            "on-surface-variant": "#414942",
+            "inverse-primary": "#a5d1b2",
+            "on-background": "#1c1c19",
+            "surface-dim": "#dcdad5",
+            "border-subtle": "#E5E0D8",
+            "surface": "#fcf9f4",
+            "primary-container": "#3a6249",
+            "primary-fixed-dim": "#a5d1b2",
+            "tertiary-fixed": "#fae0a4",
+            "on-tertiary-container": "#4e3e11",
+            "tertiary": "#6f5c2d",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#3f674d",
+            "on-tertiary-fixed": "#241a00",
+            "surface-container-high": "#ebe8e3",
+            "background": "#fcf9f4",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e5e2dd",
+            "charcoal-ink": "#111312",
+            "on-primary-fixed": "#002110",
+            "surface-container": "#f0ede8",
+            "primary-fixed": "#c0edcd",
+            "inverse-surface": "#31302d",
+            "surface-container-low": "#f6f3ee",
+            "on-tertiary": "#ffffff",
+            "sage-soft": "#EAF0EC",
+            "on-error": "#ffffff",
+            "on-surface": "#1c1c19",
+            "on-secondary-fixed": "#29170e",
+            "surface-container-highest": "#e5e2dd"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin": "3rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          fontFamily: {
+            "headline-sm": ["DM Sans", "sans-serif"],
+            "body-sm": ["DM Sans", "sans-serif"],
+            "headline-lg": ["DM Sans", "sans-serif"],
+            "label-md": ["DM Sans", "sans-serif"],
+            "headline-lg-mobile": ["DM Sans", "sans-serif"],
+            "body-lg": ["DM Sans", "sans-serif"],
+            "headline-md": ["DM Sans", "sans-serif"],
+            "label-sm": ["DM Sans", "sans-serif"],
+            "label-lg": ["DM Sans", "sans-serif"],
+            "display-lg": ["DM Sans", "sans-serif"],
+            "body-md": ["DM Sans", "sans-serif"],
+            "display-lg-mobile": ["DM Sans", "sans-serif"]
+          },
+          fontSize: {
+            "headline-sm": ["1.25rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            "body-sm": ["0.875rem", { lineHeight: "1.375rem", fontWeight: "400" }],
+            "headline-lg": ["2.5rem", { lineHeight: "3rem", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "label-md": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.02em", fontWeight: "500" }],
+            "headline-lg-mobile": ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.875rem", fontWeight: "400" }],
+            "headline-md": ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "label-sm": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.04em", fontWeight: "600" }],
+            "label-lg": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0.01em", fontWeight: "600" }],
+            "display-lg": ["3.25rem", { lineHeight: "3.75rem", letterSpacing: "-0.03em", fontWeight: "700" }],
+            "body-md": ["1rem", { lineHeight: "1.625rem", fontWeight: "400" }],
+            "display-lg-mobile": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.02em", fontWeight: "700" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Navigation Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-border-subtle/80 shadow-[0_1px_6px_rgba(0,0,0,0.03)]">
+<div class="h-20 w-full px-margin-mobile lg:px-margin max-w-7xl mx-auto flex items-center justify-between gap-gutter">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2.5 group" href="#">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">volunteer_activism</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">We Care</span>
+<span class="text-[11px] font-medium text-on-surface-variant tracking-wider uppercase -mt-1 hidden sm:block">Elder Companionship</span>
+</div>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-7">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors font-medium" href="#services">Services</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors font-medium" href="#how-it-works">How It Works</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors font-medium" href="#pricing-plans">Pricing Plans</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors font-medium" href="#trust-safety">Trust &amp; Safety</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors font-medium" href="#faq">FAQ</a>
+</nav>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<a aria-label="Contact us on WhatsApp" class="inline-flex items-center gap-1.5 px-3 py-2 sm:px-3.5 sm:py-2 rounded-full font-label-md text-label-md text-primary bg-sage-soft hover:bg-primary hover:text-on-primary transition-all" href="https://wa.me/919535328769" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[19px]">chat</span>
+<span class="hidden sm:inline font-semibold">WhatsApp</span>
+</a>
+<a class="inline-flex items-center px-5 py-2.5 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold transition-all shadow-[0_2px_8px_rgba(34,74,51,0.2)]" href="#pricing-plans">
+          Book a Visit
+        </a>
+</div>
+</div>
+</header>
+<main class="w-full pt-20 bg-surface">
+<!-- Hero Section -->
+<section class="relative w-full overflow-hidden px-margin-mobile lg:px-margin pt-12 pb-16 lg:pb-24 border-b border-border-subtle/50">
+<div class="absolute -top-32 right-10 w-96 h-96 bg-sage-soft/70 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/2 -left-20 w-80 h-80 bg-secondary-fixed/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto flex flex-col gap-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Hero Pitch -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 self-start bg-sage-soft px-3.5 py-1.5 rounded-full border border-primary/10">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Dignified Eldercare Companionship</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile lg:text-display-lg text-charcoal-ink font-bold leading-tight tracking-tight">
+              Dedicated, compassionate care companions for your parents.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              Professional, vetted companions for hospital visits, home wellness, and daily logistics. Book by the hour or choose a dedicated monthly plan — with complete peace of mind on your phone.
+            </p>
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold shadow-sm transition-all" href="#pricing-plans">
+<span>Book a Care Visit</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-primary text-primary hover:bg-sage-soft font-label-lg text-label-lg font-semibold transition-colors" href="#pricing-plans">
+<span>Explore Plans &amp; Pricing</span>
+</a>
+</div>
+</div>
+<!-- Right Hero Live Status Card -->
+<div class="lg:col-span-5 w-full">
+<div class="bg-surface-card rounded-2xl p-6 sm:p-7 shadow-[0_12px_32px_-4px_rgba(17,19,18,0.06)] border border-border-subtle relative overflow-hidden flex flex-col gap-5">
+<div class="flex items-center justify-between border-b border-border-subtle/80 pb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Live Visit in Progress</span>
+</div>
+<span class="bg-sage-soft text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full font-medium">Fortis Hospital, BLR</span>
+</div>
+<!-- Companion Details -->
+<div class="flex items-center justify-between bg-surface-container-low p-4 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-lg shadow-sm">
+                    AK
+                  </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Ananya K.</span>
+<span class="material-symbols-outlined text-primary text-[18px]" title="Police Verified">verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Companion with Mrs. Sharma (68)</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-sage-soft px-2.5 py-1 rounded-md">OPD Escort</span>
+</div>
+<!-- Vitals Logged -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-surface-container-low rounded-xl flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[17px] text-primary">vital_signs</span>
+<span>Vitals Logged</span>
+</div>
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">BP: 122/80 · SpO2: 98%</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[17px] text-primary">pin</span>
+<span>Door PIN Verified</span>
+</div>
+<span class="font-mono text-label-md text-label-md font-bold text-primary tracking-widest">#4719</span>
+</div>
+</div>
+<!-- Live Shared Note -->
+<div class="p-3.5 bg-sage-soft/70 border border-primary/10 rounded-xl flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">assignment_turned_in</span>
+<p class="font-body-sm text-body-sm text-charcoal-ink leading-snug">
+                  "Dr. Raman completed joint checkup. 2 prescription changes logged, medicines collected. Now escorting mother safely back home in cab."
+                </p>
+</div>
+<!-- Bottom Timestamp Note -->
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-1 pt-1">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>Notes &amp; photo shared 8m ago</span>
+</span>
+<span class="text-primary font-semibold">Dubai family connected</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Badges Strip directly under hero -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-border-subtle/80">
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-card border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">100% Background Verified</span>
+<span class="text-body-sm text-body-sm text-on-surface-variant">Police clearance &amp; Aadhaar check</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-card border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">pin</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Door PIN Security</span>
+<span class="text-body-sm text-body-sm text-on-surface-variant">Only right companion enters</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-card border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">clinical_notes</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Live Visit Notes &amp; Vitals</span>
+<span class="text-body-sm text-body-sm text-on-surface-variant">Instant updates to family phone</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-card border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">event_available</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Zero Cancellation Friction</span>
+<span class="text-body-sm text-body-sm text-on-surface-variant">Free reschedule &amp; easy refunds</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Crisp 3-Category Services -->
+<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface-container-low" id="services">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<div class="flex flex-col gap-2 max-w-2xl">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Focused Assistance</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+            Care services tailored for everyday dignity.
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Concise, reliable support categories designed to handle every physical, administrative, and emotional need of your elderly parents.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Category 1 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-5">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">local_hospital</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Healthcare &amp; Medical Escort</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Patient, hands-on accompaniment through complex medical environments and consultations.
+                </p>
+</div>
+<ul class="flex flex-col gap-2.5 pt-2 border-t border-border-subtle">
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Doctor consultations &amp; OPD appointments</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Lab investigations &amp; diagnostic scans</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Pharmacy medicine collection</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Hospital admission &amp; discharge assistance</span>
+</li>
+</ul>
+</div>
+<div class="pt-6">
+<a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-bold hover:underline" href="#pricing-plans">
+<span>Book Medical Escort</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Category 2 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-5">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">sentiment_satisfied</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">In-Home Wellness &amp; Companionship</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Empathetic in-person presence to reduce isolation and keep everyday domestic life organized.
+                </p>
+</div>
+<ul class="flex flex-col gap-2.5 pt-2 border-t border-border-subtle">
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Warm, engaging conversation &amp; tea time</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Gentle neighborhood walks &amp; mobility support</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Sorting weekly pill strips &amp; reminders</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Tech help, smartphone setup &amp; family video calls</span>
+</li>
+</ul>
+</div>
+<div class="pt-6">
+<a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-bold hover:underline" href="#pricing-plans">
+<span>Book In-Home Care</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Category 3 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-5">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">account_balance</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Errands, Logistics &amp; Banking</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Reliable feet on the ground to tackle administrative tasks and essential errands outside the home.
+                </p>
+</div>
+<ul class="flex flex-col gap-2.5 pt-2 border-t border-border-subtle">
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Bank visits, KYC paperwork &amp; life certificates</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Pension office, electricity &amp; utility payments</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Grocery shopping, provisions &amp; dry cleaning</span>
+</li>
+<li class="flex items-center gap-2.5 font-body-sm text-body-sm text-charcoal-ink">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Supervising domestic home repairs and vendors</span>
+</li>
+</ul>
+</div>
+<div class="pt-6">
+<a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-bold hover:underline" href="#pricing-plans">
+<span>Book Errands &amp; Banking</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Clear 3-Step Journey -->
+<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface" id="how-it-works">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<div class="text-center max-w-xl mx-auto flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Simple &amp; Seamless</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+            How We Care Works
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            From abroad or across town, booking trusted assistance for your parents takes under two minutes.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Step 1 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col gap-4 relative">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center font-bold">
+              1
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Tell Us What's Needed</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Select the service type, preferred duration (1 to 4 hours), and your parent's home address in Bangalore, Lucknow, or Nagpur. No cumbersome sign-up required.
+            </p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col gap-4 relative">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center font-bold">
+              2
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Matched with a Verified Care Companion</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              A background-checked, eldercare-trained companion in their neighborhood is assigned. At the door, a randomized 4-digit security PIN is verified before entry.
+            </p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col gap-4 relative">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center font-bold">
+              3
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Real-Time Peace of Mind</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Receive live arrival notifications, doctor consultation notes, prescription changes, photos, and vital readings directly on your phone as the visit wraps up.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Approved Pricing Structure (3-Tier Comparison Table/Cards) -->
+<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface-container-low" id="pricing-plans">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<div class="text-center max-w-2xl mx-auto flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Transparent &amp; Dignified</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+            Approved Pricing Plans
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Choose pay-as-you-go hourly visits, multi-visit packs, or comprehensive monthly memberships. Clear pricing, no surprise fees.
+          </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+<!-- Tier 1: On-Demand Care -->
+<div class="bg-surface-card rounded-2xl p-7 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between gap-8 hover:border-primary/50 transition-colors">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Pay-As-You-Go</span>
+<h3 class="font-headline-md text-headline-md text-charcoal-ink">On-Demand Care</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Perfect for occasional hospital appointments, OPD escorts, or one-off urgent tasks.
+                </p>
+</div>
+<div class="flex items-baseline gap-1.5 pb-4 border-b border-border-subtle">
+<span class="text-display-lg-mobile font-bold text-charcoal-ink">₹199</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ first hour</span>
+</div>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-charcoal-ink">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Book from 1 to 4 hours as needed</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>₹100 for each additional 30 minutes</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Police-verified local companion matched</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Live door PIN &amp; post-visit field note</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Zero subscription or recurring fee</span>
+</li>
+</ul>
+</div>
+<a class="w-full py-3.5 px-6 rounded-full border-2 border-primary text-primary hover:bg-sage-soft font-label-lg text-label-lg font-bold text-center transition-all" href="https://wa.me/919535328769?text=Hi%20We%20Care,%20I'd%20like%20to%20book%20an%20On-Demand%20visit" rel="noopener" target="_blank">
+              Book by the Hour
+            </a>
+</div>
+<!-- Tier 2: Care Packages (Popular / Best Value) -->
+<div class="bg-surface-card rounded-2xl p-7 sm:p-8 border-2 border-primary shadow-lg flex flex-col justify-between gap-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-on-primary px-4 py-1 rounded-bl-xl font-label-sm text-label-sm font-bold uppercase tracking-wider">
+              Most Popular · Best Value
+            </div>
+<div class="flex flex-col gap-6 pt-2">
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Prepaid Bundles</span>
+<h3 class="font-headline-md text-headline-md text-charcoal-ink">Care Packages</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Ideal for recurring clinic visits, physical therapy, and bi-weekly check-ins.
+                </p>
+</div>
+<div class="flex items-baseline gap-1.5 pb-4 border-b border-border-subtle">
+<span class="text-display-lg-mobile font-bold text-primary">₹899</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 5-visit bundle</span>
+</div>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-charcoal-ink">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Choice of <strong>5 or 10 visit bundles</strong></span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Valid for a full <strong>12 months</strong> with zero expiry pressure</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Discounted per-visit rate</strong> vs standard hourly</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Priority companion reservation window</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Includes full door PIN &amp; digital report log</span>
+</li>
+</ul>
+</div>
+<a class="w-full py-3.5 px-6 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold text-center transition-all shadow-md" href="https://wa.me/919535328769?text=Hi%20We%20Care,%20I'm%20interested%20in%20a%20Care%20Package%20Bundle" rel="noopener" target="_blank">
+              Get Care Package
+            </a>
+</div>
+<!-- Tier 3: Dedicated Monthly Care -->
+<div class="bg-surface-card rounded-2xl p-7 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between gap-8 hover:border-primary/50 transition-colors">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Membership</span>
+<h3 class="font-headline-md text-headline-md text-charcoal-ink">Dedicated Monthly Care</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Comprehensive eldercare management for parents living independently.
+                </p>
+</div>
+<div class="flex items-baseline gap-1.5 pb-4 border-b border-border-subtle">
+<span class="text-display-lg-mobile font-bold text-charcoal-ink">₹2,499</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ month</span>
+</div>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-charcoal-ink">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>Dedicated assigned companion</strong> (familiar friendly face)</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Weekly scheduled home or escort visits</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Routine vitals tracking (BP, pulse, blood sugar logs)</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span>Monthly consolidated health &amp; activity summary</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+<span><strong>24/7 dedicated care coordinator</strong> for adult children</span>
+</li>
+</ul>
+</div>
+<a class="w-full py-3.5 px-6 rounded-full border-2 border-primary text-primary hover:bg-sage-soft font-label-lg text-label-lg font-bold text-center transition-all" href="https://wa.me/919535328769?text=Hi%20We%20Care,%20I'd%20like%20to%20learn%20more%20about%20the%20Monthly%20Care%20Membership" rel="noopener" target="_blank">
+              Join Monthly Care
+            </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust & Safety Standards -->
+<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface" id="trust-safety">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<div class="text-center max-w-2xl mx-auto flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Uncompromised Security</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+            Our Trust &amp; Safety Standards
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Because allowing someone into your family's home requires complete, verified confidence.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm flex flex-col gap-3">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">shield</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Police &amp; Background Verification</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Rigorous 7-point background checks, local police clearance records, Aadhaar authentication, and physical address vetting for every companion.
+            </p>
+</div>
+<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm flex flex-col gap-3">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">favorite</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Eldercare &amp; Empathy Training</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Trained in geriatric communication, gentle mobility assistance, fall prevention awareness, and respecting elder autonomy and dignity.
+            </p>
+</div>
+<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm flex flex-col gap-3">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">lock_clock</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Door PIN Authentication</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Every visit generates a one-time 4-digit code. The companion must confirm this PIN at the threshold before a visit session officially begins.
+            </p>
+</div>
+<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm flex flex-col gap-3">
+<div class="w-12 h-12 rounded-xl bg-sage-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">description</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Comprehensive Post-Visit Summaries</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Clear, transparent documentation sent directly to your phone: vitals logged, doctor updates, receipts, photos, and next-step recommendations.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Brief Real Stories / Social Proof -->
+<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1 max-w-xl">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Real Stories</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+              Trusted by families around the world.
+            </h2>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-1 text-primary font-bold">
+<span class="material-symbols-outlined text-[20px]">star</span> 4.9/5 Rating
+            </span>
+<span>·</span>
+<span>Over 1,000+ Completed Visits</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Story 1 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between gap-6">
+<p class="font-body-md text-body-md text-charcoal-ink italic leading-relaxed">
+              "Being in Singapore while my father was admitted for eye surgery in Bangalore was gut-wrenching. Our companion kept me updated every 30 minutes, handled the discharge papers, and tucked him in safely."
+            </p>
+<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-sage-soft text-primary font-bold flex items-center justify-center text-label-md">
+                RK
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Rahul K.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Son · Living in Singapore (Parents in Bangalore)</span>
+</div>
+</div>
+</div>
+<!-- Story 2 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between gap-6">
+<p class="font-body-md text-body-md text-charcoal-ink italic leading-relaxed">
+              "When my mother experienced sudden dizziness late evening, a We Care companion arrived in 25 minutes. They coordinated the clinic triage and stayed until I could arrange travel."
+            </p>
+<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-sage-soft text-primary font-bold flex items-center justify-center text-label-md">
+                NS
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Neha S.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Daughter · Living in Dubai (Mother in Lucknow)</span>
+</div>
+</div>
+</div>
+<!-- Story 3 -->
+<div class="bg-surface-card rounded-2xl p-7 border border-border-subtle shadow-sm flex flex-col justify-between gap-6">
+<p class="font-body-md text-body-md text-charcoal-ink italic leading-relaxed">
+              "My companion Ramesh helps me with banking forms and drives me to the park. It relieves my children from worrying about my routine, and restores my own independence."
+            </p>
+<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-sage-soft text-primary font-bold flex items-center justify-center text-label-md">
+                SV
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-charcoal-ink">Mr. Shyamlal V. (69)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Retired Resident · Whitefield, Bangalore</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Compact Accordion FAQ -->
+<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface" id="faq">
+<div class="max-w-3xl mx-auto flex flex-col gap-10">
+<div class="text-center flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Clarity &amp; Assurance</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-charcoal-ink">
+            Frequently Asked Questions
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Everything you need to know about booking dignified care for your loved ones.
+          </p>
+</div>
+<div class="flex flex-col gap-3.5">
+<!-- Question 1 -->
+<div class="faq-item bg-surface-card rounded-xl border border-border-subtle overflow-hidden">
+<button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-charcoal-ink" type="button">
+<span>What does a companion do versus a clinical nurse?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant border-t border-border-subtle/50 pt-3">
+              Companions are dedicated personal navigators who accompany parents to hospitals, doctor OPDs, banks, and grocery runs, while providing warm social engagement, technology support, and medication organization. They do not perform invasive medical procedures (such as injections, intravenous lines, or catheter care).
+            </div>
+</div>
+<!-- Question 2 -->
+<div class="faq-item bg-surface-card rounded-xl border border-border-subtle overflow-hidden">
+<button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-charcoal-ink" type="button">
+<span>How does the door PIN verification work?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant border-t border-border-subtle/50 pt-3">
+              When a booking is confirmed, a random 4-digit code is sent to your phone and visible to your parent. When the companion arrives at their residence, they must enter this exact code into their companion app to unlock the session. This guarantees only the authenticated person enters.
+            </div>
+</div>
+<!-- Question 3 -->
+<div class="faq-item bg-surface-card rounded-xl border border-border-subtle overflow-hidden">
+<button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-charcoal-ink" type="button">
+<span>Can I book and coordinate care from abroad?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant border-t border-border-subtle/50 pt-3">
+              Yes, over 40% of our families reside in the UAE, US, UK, Singapore, and Canada. You can book seamlessly online or via WhatsApp, pay with international cards, and receive real-time notifications, photos, and post-visit reports formatted for your local timezone.
+            </div>
+</div>
+<!-- Question 4 -->
+<div class="faq-item bg-surface-card rounded-xl border border-border-subtle overflow-hidden">
+<button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-headline-sm text-headline-sm text-charcoal-ink" type="button">
+<span>What happens if an appointment or visit runs longer than planned?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-200">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant border-t border-border-subtle/50 pt-3">
+              Hospitals and banks often experience unexpected delays. Your companion remains with your parent. Additional time beyond the booked slot is billed transparently in 30-minute intervals at our standard rate (₹100 per 30 mins) with zero penalty.
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reassuring Closing CTA -->
+<section class="w-full px-margin-mobile lg:px-margin pb-20">
+<div class="max-w-7xl mx-auto bg-primary rounded-3xl p-8 sm:p-12 lg:p-16 text-on-primary flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary-fixed-dim/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-3 max-w-xl text-center lg:text-left">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-semibold">Immediate &amp; Scheduled Availability</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-primary font-bold">
+            Give your parents the dedicated care they deserve.
+          </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container leading-relaxed">
+            Professional companions ready in Bangalore, Lucknow, and Nagpur. Book a single visit or schedule a personal consultation today.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-surface text-primary hover:bg-surface-container font-label-lg text-label-lg font-bold transition-all shadow-md" href="#pricing-plans">
+<span>Book a Care Visit</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary-container hover:bg-on-primary-fixed-variant text-on-primary font-label-lg text-label-lg font-semibold transition-all border border-on-primary/20" href="https://wa.me/919535328769" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Schedule a Consultation</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Comprehensive Footer -->
+<footer class="w-full bg-surface-container-low border-t border-border-subtle">
+<div class="w-full px-margin-mobile lg:px-margin max-w-7xl mx-auto py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+<!-- Brand Info -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">volunteer_activism</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">We Care</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm leading-relaxed">
+            Empathetic, dignified eldercare and professionally trained personal companions. Delivering peace of mind and autonomous daily living for cherished parents across India.
+          </p>
+<div class="flex items-center gap-2 pt-2">
+<div class="inline-flex items-center gap-1.5 bg-surface-card border border-border-subtle px-3 py-1.5 rounded-lg font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+<span>100% Background Checked</span>
+</div>
+<div class="inline-flex items-center gap-1.5 bg-surface-card border border-border-subtle px-3 py-1.5 rounded-lg font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-[16px]">health_and_safety</span>
+<span>Elder Dignity Charter</span>
+</div>
+</div>
+</div>
+<!-- Available Cities -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-lg text-label-lg text-charcoal-ink font-bold">Active Locations</h4>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Bangalore (All Zones)</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Lucknow (Gomti Nagar &amp; Beyond)</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Nagpur (Central &amp; Suburbs)</a></li>
+<li class="pt-1"><span class="text-outline font-label-sm text-label-sm">Pune &amp; Hyderabad (Opening Soon)</span></li>
+</ul>
+</div>
+<!-- Care Services -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-lg text-label-lg text-charcoal-ink font-bold">Care Services</h4>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#services">Healthcare &amp; OPD Escorts</a></li>
+<li><a class="hover:text-primary transition-colors" href="#services">In-Home Wellness Visits</a></li>
+<li><a class="hover:text-primary transition-colors" href="#services">Banking &amp; Pension Paperwork</a></li>
+<li><a class="hover:text-primary transition-colors" href="#services">Lab Investigation Assistance</a></li>
+<li><a class="hover:text-primary transition-colors" href="#pricing-plans">Monthly Membership Care</a></li>
+</ul>
+</div>
+<!-- Company & Safety -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-lg text-label-lg text-charcoal-ink font-bold">Company &amp; Trust</h4>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#how-it-works">How It Works</a></li>
+<li><a class="hover:text-primary transition-colors" href="#trust-safety">Our 7-Step Verification</a></li>
+<li><a class="hover:text-primary transition-colors" href="#faq">Frequently Asked Questions</a></li>
+<li><a class="hover:text-primary transition-colors" href="https://wa.me/919535328769" rel="noopener" target="_blank">Emergency Desk</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Become a Companion</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-on-surface-variant font-label-sm text-label-sm">
+<p>© 2025 We Care Companion Services Pvt. Ltd. Grounded in empathetic elder support.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#trust-safety">Elder Safeguarding Code</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- FAQ Accordion JS Script -->
+<script>
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.material-symbols-outlined');
+        const isHidden = content.classList.contains('hidden');
+
+        // Close all items
+        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-toggle .material-symbols-outlined').forEach(i => i.textContent = 'expand_more');
+
+        // If it was hidden, open it
+        if (isHidden) {
+          content.classList.remove('hidden');
+          icon.textContent = 'expand_less';
+        }
+      });
+    });
+  </script>
+</body></html>

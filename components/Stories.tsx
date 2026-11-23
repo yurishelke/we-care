@@ -1,5 +1,5 @@
 import { TESTIMONIALS } from "@/lib/content";
-import { Star } from "./icons";
+import { Heart } from "./icons";
 import Reveal from "./Reveal";
 
 function StoryCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
@@ -24,10 +24,10 @@ export default function Stories() {
         <Reveal className="wc-reel-head">
           <div className="wc-head left" style={{ margin: 0 }}>
             <span className="wc-kicker">Family stories</span>
-            <h2 className="wc-h2">Trusted by families around the world.</h2>
+            <h2 className="wc-h2 wc-reel-h2">What the families tell us.</h2>
           </div>
           <span className="wc-rating">
-            <Star size={18} /> 4.9/5 Rating · 1,000+ Completed Visits
+            <Heart size={17} /> Families abroad · Parents in Nagpur
           </span>
         </Reveal>
       </div>

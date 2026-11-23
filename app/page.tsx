@@ -1,33 +1,37 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import BookEstimator from "@/components/BookEstimator";
 import Services from "@/components/Services";
 import HowItWorks from "@/components/HowItWorks";
+import FounderStory from "@/components/FounderStory";
+import Stories from "@/components/Stories";
 import Pricing from "@/components/Pricing";
 import Trust from "@/components/Trust";
-import Stories from "@/components/Stories";
 import InterestStrip from "@/components/InterestStrip";
 import Faq from "@/components/Faq";
-import ClosingCta from "@/components/ClosingCta";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { BookingProvider } from "@/components/BookingContext";
+
+/* One job per section: hook → breadth → process → cost → emotion → proof →
+   safety → reach → objections → action. */
 
 export default function Home() {
   return (
-    <>
+    <BookingProvider>
       <Nav />
       <main>
         <Hero />
-        <BookEstimator />
         <Services />
         <HowItWorks />
         <Pricing />
-        <Trust />
+        <FounderStory />
         <Stories />
+        <Trust />
         <InterestStrip />
         <Faq />
-        <ClosingCta />
+        <Contact />
       </main>
       <Footer />
-    </>
+    </BookingProvider>
   );
 }

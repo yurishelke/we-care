@@ -1,171 +1,221 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { HOW_STEPS, VISIT_DEMO } from "@/lib/content";
-import { ArrowRight, CheckCircle, Clock, NoteIcon, Verified } from "./icons";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { HOW_STEPS } from "@/lib/content";
+import { useBooking } from "./BookingContext";
+import { ArrowRight } from "./icons";
 import Reveal from "./Reveal";
 
-const STEP_MS = 3400;
+/* "The Care Journey" — a compact, self-contained loop.
+   A head travels the path on a timer (~1s per step, no scroll dependency):
+   each station lights as it arrives and swaps its step card, then the walk
+   restarts. Different mechanics from the hero's timed card crossfade
+   (travel + draw vs. crossfade).
+   Reduced-motion / no-JS: static numbered list. */
+
+const D =
+  "M52 352 C 132 396, 214 368, 226 306 C 236 254, 172 218, 216 170 " +
+  "C 262 120, 388 186, 446 146 C 492 114, 470 58, 540 46 C 580 39, 600 56, 606 78";
+/* station positions as fractions of the path length */
+const STATION_AT = [0.08, 0.4, 0.72, 0.95];
+const VB = { w: 640, h: 420 };
+
+/* ~3s per stage: a segment travels to a station (~1s) and then holds on it
+   (2s of quiet reading time) before the next hop starts */
+const TRAVEL_MS = 1000;
+const READ_MS = 2000;
+type Seg = { from: number; target: number; ms: number };
+const SEGMENTS: Seg[] = (() => {
+  const segs: Seg[] = [];
+  let cur = 0;
+  for (const at of STATION_AT) {
+    segs.push({ from: cur, target: at, ms: TRAVEL_MS });
+    segs.push({ from: at, target: at, ms: READ_MS });
+    cur = at;
+  }
+  return segs;
+})();
+const CYCLE_MS = SEGMENTS.reduce((s, g) => s + g.ms, 0);
+
+const easeInOut = (u: number) =>
+  u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
 
 export default function HowItWorks() {
-  const [idx, setIdx] = useState(0);
-  const [resetKey, setResetKey] = useState(0);
+  const { openBooking } = useBooking();
+  const [journey, setJourney] = useState(false);
+  const [active, setActive] = useState(0);
+  const [pts, setPts] = useState<{ x: number; y: number }[]>([]);
+  const pinRef = useRef<HTMLDivElement | null>(null);
+  const ghostRef = useRef<SVGPathElement | null>(null);
+  const headRef = useRef<SVGGElement | null>(null);
+  const lenRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = window.setInterval(() => {
-      if (!document.hidden) setIdx((v) => (v + 1) % HOW_STEPS.length);
-    }, STEP_MS);
-    return () => window.clearInterval(t);
-  }, [resetKey]);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setJourney(true);
+    }
+  }, []);
 
-  const pick = (i: number) => {
-    setIdx(i);
-    setResetKey((k) => k + 1); /* restart the auto-cycle from the picked step */
-  };
+  /* station + head coordinates live in viewBox units, measured from the path */
+  useLayoutEffect(() => {
+    if (!journey) return;
+    const place = () => {
+      const path = ghostRef.current;
+      if (!path) return;
+      lenRef.current = path.getTotalLength();
+      setPts(
+        STATION_AT.map((f) => {
+          const q = path.getPointAtLength(f * lenRef.current);
+          return { x: q.x, y: q.y };
+        })
+      );
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [journey]);
+
+  /* the cycle itself: travel, hold ~2s on each card, loop */
+  useEffect(() => {
+    if (!journey) return;
+    const el = pinRef.current;
+    const path = ghostRef.current;
+    const head = headRef.current;
+    if (!el || !path || !head) return;
+
+    let raf = 0;
+    let prev = performance.now();
+    let acc = 0;
+
+    const walk = (p: number) => {
+      el.style.setProperty("--p", p.toFixed(4));
+      const q = path.getPointAtLength(p * lenRef.current);
+      head.setAttribute("transform", `translate(${q.x} ${q.y})`);
+      let next = 0;
+      for (let i = 0; i < STATION_AT.length; i++) {
+        if (p >= STATION_AT[i] - 0.02) next = i;
+      }
+      setActive((v) => (v === next ? v : next));
+    };
+
+    const frame = (now: number) => {
+      if (document.hidden) prev = now; /* freeze instead of jumping ahead */
+      acc += now - prev;
+      prev = now;
+      const t = acc % CYCLE_MS;
+      let p = 0;
+      let done = 0;
+      for (const seg of SEGMENTS) {
+        if (t <= done + seg.ms) {
+          p = seg.from + (seg.target - seg.from) * easeInOut((t - done) / seg.ms);
+          break;
+        }
+        done += seg.ms;
+        p = seg.target;
+      }
+      walk(p);
+      raf = requestAnimationFrame(frame);
+    };
+
+    walk(0);
+    prev = performance.now();
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+  }, [journey, pts]);
 
   return (
     <section className="wc-sec wc-how" id="how">
       <div className="wc-container">
         <Reveal className="wc-head left">
-          <span className="wc-kicker">How it works</span>
-          <h2 className="wc-h2">You will know every step of it.</h2>
+          <span className="wc-kicker">From wherever you are</span>
+          <h2 className="wc-h2">How it works</h2>
           <p className="wc-sub">
-            From wherever you are, on your phone — booked, verified,
-            authenticated at the door, and reported back the same day.
+            Four steps, and you&apos;re part of every one of them.
           </p>
         </Reveal>
+      </div>
 
-        <div className="wc-how-grid">
-          <Reveal delay={100}>
-            <div className="wc-how-steps" role="tablist" aria-label="Visit steps">
-              {HOW_STEPS.map((s, i) => (
-                <button
-                  key={s.n}
-                  type="button"
-                  role="tab"
-                  aria-selected={idx === i}
-                  className={`wc-how-step ${idx === i ? "is-on" : ""}`}
-                  onClick={() => pick(i)}
-                >
-                  <span className="wc-how-step-n">{s.n}</span>
-                  <span>
-                    <h3>{s.title}</h3>
-                    <p>{s.body}</p>
+      {journey ? (
+        <div className="wc-container">
+          <div className="wc-journey" ref={pinRef}>
+            <div className="wc-journey-grid">
+              <div className="wc-journey-map" aria-hidden="true">
+                <svg viewBox={`0 0 ${VB.w} ${VB.h}`} fill="none">
+                  <path
+                    ref={ghostRef}
+                    className="wc-journey-ghost"
+                    d={D}
+                    pathLength={1}
+                  />
+                  <path className="wc-journey-line" d={D} pathLength={1} />
+                  <g ref={headRef}>
+                    <circle className="wc-journey-halo" r="13" />
+                    <circle className="wc-journey-head" r="7" />
+                  </g>
+                </svg>
+                {pts.map((pt, i) => (
+                  <span
+                    key={i}
+                    className={`wc-journey-station ${
+                      i < active ? "is-done" : ""
+                    } ${i === active ? "is-on" : ""}`}
+                    style={{
+                      left: `${(pt.x / VB.w) * 100}%`,
+                      top: `${(pt.y / VB.h) * 100}%`,
+                    }}
+                  >
+                    {i + 1}
                   </span>
-                </button>
-              ))}
-            </div>
-            <div className="wc-how-cta">
-              <a className="wc-btn" href="#book">
-                Book a visit <ArrowRight size={17} className="wc-arrow" />
-              </a>
-            </div>
-          </Reveal>
+                ))}
+              </div>
 
-          <Reveal delay={200} className="wc-phone-zone">
-            <div className="wc-phone" aria-hidden="true">
-              <div className="wc-phone-screen">
-                <span className="wc-phone-notch" />
-                <div className="wc-phone-status">
-                  <span>9:41</span>
-                  <span>We Care</span>
+              <div className="wc-journey-cards">
+                <div className="wc-j-stack">
+                  {HOW_STEPS.map((s, i) => (
+                    <div
+                      key={s.n}
+                      className={`wc-how-step wc-j-card ${
+                        i === active ? "is-on" : ""
+                      }`}
+                      aria-hidden={i !== active}
+                    >
+                      <span className="wc-how-step-n">{s.n}</span>
+                      <span>
+                        <h3>{s.title}</h3>
+                        <p>{s.body}</p>
+                      </span>
+                    </div>
+                  ))}
                 </div>
-                <div className="wc-phone-body">
-                  {/* 1 · booked */}
-                  <div className={`wc-screen ${idx === 0 ? "is-on" : ""}`}>
-                    <span className="wc-screen-title">Visit booked</span>
-                    <div className="wc-mini-card">
-                      <small>Hospital trip · {VISIT_DEMO.place}</small>
-                      <b>Tuesday · 10:00 AM · 2 hours</b>
-                    </div>
-                    <div className="wc-mini-card wc-mini-row">
-                      <Clock size={18} />
-                      <span>
-                        <small>Payment</small>
-                        <b>Paid online · ₹399</b>
-                      </span>
-                    </div>
-                    <span className="wc-pill-ok">
-                      <CheckCircle size={13} /> Confirmed
-                    </span>
-                  </div>
-
-                  {/* 2 · on the way */}
-                  <div className={`wc-screen ${idx === 1 ? "is-on" : ""}`}>
-                    <span className="wc-screen-title">On her way</span>
-                    <div className="wc-route">
-                      <svg viewBox="0 0 300 110" preserveAspectRatio="none">
-                        <path
-                          className="wc-route-path"
-                          d="M42 74 C 104 92, 150 18, 232 26"
-                          fill="none"
-                          stroke="var(--bar)"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                        />
-                        <circle cx="42" cy="74" r="5" fill="var(--chip)" stroke="var(--mut)" strokeWidth="1.5" />
-                        <circle cx="232" cy="26" r="5" fill="var(--green)" stroke="var(--on-green)" strokeWidth="1.5" />
-                      </svg>
-                      <span className="wc-route-dot" />
-                    </div>
-                    <div className="wc-mini-card wc-mini-row">
-                      <span className="wc-mini-ava">{VISIT_DEMO.initials}</span>
-                      <span>
-                        <b>{VISIT_DEMO.companion}</b>
-                        <small>Police-verified · We Care ID</small>
-                      </span>
-                    </div>
-                    <span className="wc-pill-ok">
-                      <Clock size={13} /> 8 min away
-                    </span>
-                  </div>
-
-                  {/* 3 · at the door */}
-                  <div className={`wc-screen ${idx === 2 ? "is-on" : ""}`}>
-                    <span className="wc-screen-title">At the door</span>
-                    <div className="wc-mini-card">
-                      <small>{VISIT_DEMO.parent} reads out the PIN</small>
-                      <b>One-time code for this visit</b>
-                    </div>
-                    <div className="wc-phone-pin">
-                      {VISIT_DEMO.pin.map((d, i) => (
-                        <span key={i} style={{ ["--k" as string]: i }}>
-                          {d}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="wc-pill-ok">
-                      <Verified size={13} /> PIN matched
-                    </span>
-                  </div>
-
-                  {/* 4 · visit note */}
-                  <div className={`wc-screen ${idx === 3 ? "is-on" : ""}`}>
-                    <span className="wc-screen-title">Visit note</span>
-                    <div className="wc-mini-card">
-                      <small>
-                        <NoteIcon size={13} /> {VISIT_DEMO.vitals}
-                      </small>
-                      <b>2 prescription changes logged</b>
-                    </div>
-                    {[92, 100, 78, 96, 60].map((w, i) => (
-                      <span
-                        key={i}
-                        className="wc-note-line"
-                        style={{ width: `${w}%`, ["--k" as string]: i }}
-                      />
-                    ))}
-                    <span className="wc-pill-ok">
-                      <CheckCircle size={13} /> Shared with family
-                    </span>
-                  </div>
+                <div className="wc-how-cta">
+                  <button type="button" className="wc-btn" onClick={openBooking}>
+                    Book your visit <ArrowRight size={17} className="wc-arrow" />
+                  </button>
                 </div>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="wc-container">
+          <div className="wc-how-steps wc-how-static">
+            {HOW_STEPS.map((s) => (
+              <div key={s.n} className="wc-how-step">
+                <span className="wc-how-step-n">{s.n}</span>
+                <span>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="wc-how-cta">
+            <button type="button" className="wc-btn" onClick={openBooking}>
+              Book your visit <ArrowRight size={17} className="wc-arrow" />
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
