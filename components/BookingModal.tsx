@@ -2,14 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BOOKING, consultLink } from "@/lib/content";
-import { ArrowRight, CheckCircle, Close, WhatsApp } from "./icons";
+import { CheckCircle, Close, WhatsApp } from "./icons";
 
 /* Two-step booking modal.
    Step 1 — Calendly inline embed (widget.js loaded once, resize: true).
    Step 2 — RazorPay payment button, mounted only after the booking is
-   confirmed (calendly.event_scheduled postMessage) or via the manual
-   safety-net link. No backend: receipts are handled by the RazorPay
-   button config itself. */
+   confirmed (calendly.event_scheduled postMessage). No backend: receipts
+   are handled by the RazorPay button config itself. */
 
 declare global {
   interface Window {
@@ -47,6 +46,7 @@ function loadScript(src: string): Promise<void> {
 
 type Props = {
   booked: boolean;
+  planId?: string;
   onClose: () => void;
   onBooked: () => void;
   getOpener: () => HTMLElement | null;
@@ -54,6 +54,7 @@ type Props = {
 
 export default function BookingModal({
   booked,
+  planId,
   onClose,
   onBooked,
   getOpener,
@@ -126,19 +127,24 @@ export default function BookingModal({
     return () => window.removeEventListener("message", onMsg);
   }, [step, onBooked]);
 
-  /* step 2: mount the RazorPay button with a fresh script node so it
-     re-renders on every open (the URL itself is browser-cached) */
+  /* step 2: mount the chosen plan's RazorPay button with a fresh script
+     node so it re-renders on every open (the URL itself is browser-cached).
+     Auto-renew loads the subscription widget script instead of the
+     one-time payment button script. Unknown/no plan falls back to monthly. */
   useEffect(() => {
     if (step !== 2) return;
     const host = payRef.current;
     if (!host) return;
+    const btn =
+      (planId && BOOKING.planButtons[planId]) || BOOKING.planButtons.monthly;
     const form = document.createElement("form");
     const script = document.createElement("script");
-    script.src = BOOKING.razorpayScriptSrc;
+    script.src = btn.scriptSrc;
     script.async = true;
     /* underscore attribute — dataset would hyphenate it and RazorPay
        would reject the button id */
-    script.setAttribute("data-payment_button_id", BOOKING.razorpayButtonId);
+    script.setAttribute(btn.attr, btn.value);
+    if (btn.theme) script.setAttribute("data-button_theme", btn.theme);
     script.onerror = () => setPayFailed(true);
     form.appendChild(script);
     host.appendChild(form);
@@ -159,7 +165,7 @@ export default function BookingModal({
       form.remove();
       setPayFailed(false);
     };
-  }, [step]);
+  }, [step, planId]);
 
   /* Esc closes, Tab stays inside the panel */
   useEffect(() => {
@@ -250,15 +256,6 @@ export default function BookingModal({
               ) : (
                 <div id="calendly-embed" ref={embedRef} className="wc-calendly-embed" />
               )}
-              {/* safety net if the postMessage never arrives */}
-              <button
-                type="button"
-                className="wc-book-continue"
-                onClick={() => setStep(2)}
-              >
-                {BOOKING.continueLabel}{" "}
-                <ArrowRight size={15} className="wc-arrow" />
-              </button>
             </div>
           ) : (
             <div key="s2" className="wc-step-in wc-pay">

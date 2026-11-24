@@ -18,11 +18,7 @@ export default function Services() {
         <Reveal className="wc-head left">
           <span className="wc-kicker">{CARE_HEADING.kicker}</span>
           <h2 className="wc-h2">{CARE_HEADING.title}</h2>
-          {CARE_HEADING.leads.map((l) => (
-            <p className="wc-sub" key={l}>
-              {l}
-            </p>
-          ))}
+          <p className="wc-sub">{CARE_HEADING.leads}</p>
         </Reveal>
 
         <div className="wc-services-grid wc-care-grid">
@@ -58,7 +54,7 @@ export default function Services() {
         </Reveal>
 
         <Reveal delay={100} className="wc-care-cta">
-          <button type="button" className="wc-btn lg" onClick={openBooking}>
+          <button type="button" className="wc-btn lg" onClick={() => openBooking()}>
             Book your visit <ArrowRight size={18} className="wc-arrow" />
           </button>
         </Reveal>

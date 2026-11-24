@@ -188,7 +188,7 @@ export default function HowItWorks() {
                   ))}
                 </div>
                 <div className="wc-how-cta">
-                  <button type="button" className="wc-btn" onClick={openBooking}>
+                  <button type="button" className="wc-btn" onClick={() => openBooking()}>
                     Book your visit <ArrowRight size={17} className="wc-arrow" />
                   </button>
                 </div>
@@ -210,7 +210,7 @@ export default function HowItWorks() {
             ))}
           </div>
           <div className="wc-how-cta">
-            <button type="button" className="wc-btn" onClick={openBooking}>
+            <button type="button" className="wc-btn" onClick={() => openBooking()}>
               Book your visit <ArrowRight size={17} className="wc-arrow" />
             </button>
           </div>

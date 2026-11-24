@@ -78,7 +78,7 @@ export default function Nav() {
             >
               <WhatsApp size={19} />
             </a>
-            <button type="button" className="wc-btn sm" onClick={openBooking}>
+            <button type="button" className="wc-btn sm" onClick={() => openBooking()}>
               Book your visit
             </button>
             <button

@@ -32,7 +32,7 @@ export default function Hero() {
 
         <Reveal delay={240}>
           <div className="wc-hero-cta">
-            <button type="button" className="wc-btn lg" onClick={openBooking}>
+            <button type="button" className="wc-btn lg" onClick={() => openBooking()}>
               Book your visit <ArrowRight size={18} className="wc-arrow" />
             </button>
             <a

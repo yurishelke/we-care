@@ -1,7 +1,8 @@
 /* We Care — single source of truth for all site content.
    Transcribed from temp/plan.mhtml (north star), with owner-approved
    overrides: ₹2,749 auto-renew tier, no free-visit framing,
-   two CTAs only ("Book your visit" → booking modal, "Book Free Consultation" → WhatsApp). */
+   two CTAs only ("Book your visit" → booking modal, pricing cards
+   preselect their plan; "Book Free Consultation" → WhatsApp). */
 
 export const WHATSAPP_NUMBER = "919322966592";
 
@@ -142,9 +143,7 @@ export const CARE_SERVICES: CareService[] = [
 export const CARE_HEADING = {
   kicker: "Your love, our hands.",
   title: "What we do",
-  leads: [
-    "Every care below is part of one plan, with each visit scheduled in advance with you and your parent. Caring for parents is more than doctor visits. What matters most is genuine connection — someone they feel at ease with.",    
-  ],
+  leads: "Every care below is part of one plan, with each visit scheduled in advance with you and your parent. Caring for parents is more than doctor visits. What matters most is genuine connection — someone they feel at ease with."
 };
 
 export const CARE_ALSO = {
@@ -209,7 +208,10 @@ export type PricingTier = {
 };
 
 /* Owner-confirmed third tier (₹2,749 auto-renew) supersedes plan.mhtml,
-   which lists only ₹2,999 and ₹7,999. */
+   which lists only ₹2,999 and ₹7,999. Cards CTA into the booking modal
+   with the plan preselected; WhatsApp is the demoted secondary link. */
+export const PLAN_WA_LABEL = "Questions first? Chat with us";
+
 export const PRICING: PricingTier[] = [
   {
     id: "monthly",
@@ -225,7 +227,7 @@ export const PRICING: PricingTier[] = [
       { text: "A written report after every visit" },
       { text: "", strong: "No lock-in" },
     ],
-    cta: "Book Free Consultation",
+    cta: "Book your visit",
     waText: "Hello We Care, I'd like to start the monthly plan.",
   },
   {
@@ -245,7 +247,7 @@ export const PRICING: PricingTier[] = [
       { text: "One 2-hour visit every week (8 hours a month)" },
       { text: "A written report after every visit" },
     ],
-    cta: "Book Free Consultation",
+    cta: "Book your visit",
     waText: "Hello We Care, I'd like the auto-renewing monthly plan at ₹2,749.",
   },
   {
@@ -263,7 +265,7 @@ export const PRICING: PricingTier[] = [
       { text: "Extra visits at ₹499* each for members" },
       { text: "A written report after every visit" },
     ],
-    cta: "Book Free Consultation",
+    cta: "Book your visit",
     waText: "Hello We Care, I'd like to start the 3-month plan.",
   },
 ];
@@ -401,7 +403,9 @@ export const FOUNDER = {
   ],
 };
 
-/* ——— family stories (kept; cities corrected to Nagpur) ——— */
+/* ——— family stories (kept; cities corrected to Nagpur) ———
+   ⚠ Items 4–10 are brand-voice drafts written on brief, not real
+   client accounts. Replace with verified testimonials before publish. */
 
 export const TESTIMONIALS = [
   {
@@ -427,6 +431,62 @@ export const TESTIMONIALS = [
       "My companion Ramesh helps me with banking forms and drives me to the park. It relieves my children from worrying about my routine, and restores my own independence.",
     name: "Mr. Shyamlal V. (69)",
     meta: "Retired Resident · Dharampeth, Nagpur",
+  },
+  {
+    initials: "AD",
+    tone: "green",
+    quote:
+      "Every visit ends with a written report — what my father did, what he ate, how his spirits were. My brother and I in two different countries read the same one. No more telephone games.",
+    name: "Amit D.",
+    meta: "Son · Living in Sydney (Parents in Nagpur)",
+  },
+  {
+    initials: "MB",
+    tone: "yellow",
+    quote:
+      "The cardiologist explained everything in Marathi while I was 4,000 miles away. Our companion noted it all and sent it across the same evening — next appointment, tests, medicines, in order.",
+    name: "Meera B.",
+    meta: "Daughter · Living in London (Mother in Nagpur)",
+  },
+  {
+    initials: "SK",
+    tone: "blue",
+    quote:
+      "My son stays worried about my diabetes routine across the ocean. Now the companion checks my sugar, drives me to my Thursday walk group, and updates him — my weeks have a rhythm again.",
+    name: "Mr. Suresh K. (72)",
+    meta: "Retired Resident · Manish Nagar, Nagpur",
+  },
+  {
+    initials: "RJ",
+    tone: "lilac",
+    quote:
+      "My mother slipped at 11 at night. A We Care companion reached in twenty minutes, calmed her, and had everything settled by morning. I learned of it only the next day — and that is exactly right.",
+    name: "Ritu J.",
+    meta: "Daughter · Living in Toronto (Mother in Nagpur)",
+  },
+  {
+    initials: "PT",
+    tone: "peach",
+    quote:
+      "I was trying to manage my father's care over phone calls from abroad. It never works. Now someone physically checks — the medicines are taken, the meals are real — and I can finally breathe.",
+    name: "Priya T.",
+    meta: "Daughter · Living in Doha (Father in Nagpur)",
+  },
+  {
+    initials: "VK",
+    tone: "yellow",
+    quote:
+      "My father doubles his doses when the leaflets confuse him. The companion now sorts his weekly pill box every Sunday and sends a photo. That one habit kept us out of the ICU.",
+    name: "Vikram V.",
+    meta: "Son · Living in Manchester (Father in Nagpur)",
+  },
+  {
+    initials: "SN",
+    tone: "lilac",
+    quote:
+      "I refused to be a burden living an ocean away from my children. My companion takes me to the temple and the market, and tells my son the good and the bad — so he worries less, and I live more.",
+    name: "Mrs. Sunita N. (67)",
+    meta: "Retired Resident · Shankarpalaya, Nagpur",
   },
 ] as const;
 
@@ -514,8 +574,8 @@ export const SAMPLE_REPORT = {
 
 export const CONTACT = {
   kicker: "Miles away, never alone.",
-  title: "Book your visit",
-  lead: "Tell us about your parents and we will reply the same day to fix a time for your first visit — wherever in the world you are.",
+  title: "Contact us",
+  lead: "Tell us about your parents and we will reply the same day on WhatsApp to fix a time for your first visit — wherever in the world you are.",
   fields: {
     name: { label: "Your name", placeholder: "" },
     base: { label: "Where you are based", placeholder: "e.g. London, Pune, Dubai" },
@@ -529,7 +589,7 @@ export const CONTACT = {
       hint: "Please leave out medical details. We will ask for these on a call.",
     },
   },
-  submitLabel: "Book your visit",
+  submitLabel: "Send on WhatsApp",
   phone: "+91 93229 66592",
   waContext: "I'd like to book a visit for my parents.",
 };
@@ -539,21 +599,46 @@ export const CONTACT = {
    RazorPay payment button once an appointment is confirmed.
    No backend: receipts are handled by the RazorPay button config. */
 
+/* One Razorpay button per plan. Auto-renew mounts the subscription
+   widget (recurring billing, fixed dark theme from the dashboard);
+   the others are one-time payment buttons. */
+export type PlanButton = {
+  scriptSrc: string;
+  attr: string;
+  value: string;
+  theme?: string;
+};
+
 export const BOOKING = {
   title: "Book your visit",
   stepLabels: ["Schedule visit", "Confirm & pay"],
   calendlyUrl: "https://calendly.com/wecare-forparents/we-care-visit",
   calendlyScriptSrc: "https://assets.calendly.com/assets/external/widget.js",
-  razorpayScriptSrc: "https://checkout.razorpay.com/v1/payment-button.js",
-  razorpayButtonId: "pl_U3irBuIT4S0noQ",
+  planButtons: {
+    monthly: {
+      scriptSrc: "https://checkout.razorpay.com/v1/payment-button.js",
+      attr: "data-payment_button_id",
+      value: "pl_U3irBuIT4S0noQ",
+    },
+    "auto-renew": {
+      scriptSrc: "https://cdn.razorpay.com/static/widget/subscription-button.js",
+      attr: "data-subscription_button_id",
+      value: "pl_U3j7jxWKI2EYkP",
+      theme: "rzp-dark-standard",
+    },
+    quarterly: {
+      scriptSrc: "https://checkout.razorpay.com/v1/payment-button.js",
+      attr: "data-payment_button_id",
+      value: "pl_U3jFhA2llC8TsR",
+    },
+  } as Record<string, PlanButton>,
   loading: "Loading the scheduler…",
   loadFailed:
     "The scheduler could not load here. You can open it in a new tab instead — it takes a minute.",
   openTab: "Open Calendly in a new tab",
-  continueLabel: "Already picked a slot? Continue to payment",
   confirmTitle: "Your visit is scheduled.",
   confirmBody:
-    "Calendly has sent the details to your inbox. Complete the payment below to lock the slot in — the confirmation reaches you automatically by email.",
+    "Calendly invite has been sent to your email address. Complete the payment below to lock in the slot.",
   payNote: "Secure payment via Razorpay · confirmation emailed to you",
   payFailed:
     "The payment button could not load here. Message us on WhatsApp and we will sort it out together.",

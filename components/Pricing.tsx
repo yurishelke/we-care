@@ -1,18 +1,24 @@
+"use client";
+
 import {
   PLAN_FOOTNOTES,
   PLAN_HEADING,
   PLAN_INCLUDED,
   PLAN_NOT_INCLUDED,
+  PLAN_WA_LABEL,
   PRICING,
   waLink,
 } from "@/lib/content";
-import { ArrowRight, Check } from "./icons";
+import { ArrowRight, Check, WhatsApp } from "./icons";
 import Reveal from "./Reveal";
+import { useBooking } from "./BookingContext";
 
-/* One plan, three ways to pay. CTA is the site-wide secondary action
-   "Book Free Consultation" -> WhatsApp with per-tier context. */
+/* One plan, three ways to pay. The card CTA opens the shared booking
+   modal with the tier preselected — step 2 then shows that plan's
+   RazorPay button. WhatsApp stays as the demoted ask-a-question link. */
 
 export default function Pricing() {
+  const { openBooking } = useBooking();
   return (
     <section className="wc-sec" id="plan">
       <div className="wc-container">
@@ -53,13 +59,20 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a
+              <button
+                type="button"
                 className="wc-btn wide"
+                onClick={() => openBooking(tier.id)}
+              >
+                {tier.cta} <ArrowRight size={17} className="wc-arrow" />
+              </button>
+              <a
+                className="wc-tier-wa"
                 href={waLink(tier.waText)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {tier.cta} <ArrowRight size={17} className="wc-arrow" />
+                <WhatsApp size={14} /> {PLAN_WA_LABEL}
               </a>
             </Reveal>
           ))}

@@ -13,10 +13,11 @@ import BookingModal from "./BookingModal";
 
 /* One shared booking flow: every "Book your visit" CTA on the page calls
    openBooking() and drives the same modal instance, so the Calendly and
-   RazorPay scripts are only ever mounted once. State is session-only —
-   whoever booked mid-session resumes at step 2 on reopen. */
+   RazorPay scripts are only ever mounted once. Pricing cards pass their
+   tier id so step 2 shows that plan's payment button. State is
+   session-only — whoever booked mid-session resumes at step 2 on reopen. */
 
-type BookingCtx = { openBooking: () => void };
+type BookingCtx = { openBooking: (planId?: string) => void };
 
 const Ctx = createContext<BookingCtx | null>(null);
 
@@ -30,10 +31,12 @@ export function useBooking(): BookingCtx {
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [planId, setPlanId] = useState<string | undefined>(undefined);
   const openerRef = useRef<HTMLElement | null>(null);
 
-  const openBooking = useCallback(() => {
+  const openBooking = useCallback((plan?: string) => {
     openerRef.current = document.activeElement as HTMLElement | null;
+    setPlanId(plan);
     setOpen(true);
   }, []);
 
@@ -53,6 +56,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       {open && (
         <BookingModal
           booked={booked}
+          planId={planId}
           onClose={close}
           onBooked={markBooked}
           getOpener={getOpener}
