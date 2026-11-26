@@ -618,18 +618,18 @@ export const BOOKING = {
     monthly: {
       scriptSrc: "https://checkout.razorpay.com/v1/payment-button.js",
       attr: "data-payment_button_id",
-      value: "pl_U3irBuIT4S0noQ",
+      value: "pl_U4rU5aGo8GSCc4",
     },
     "auto-renew": {
       scriptSrc: "https://cdn.razorpay.com/static/widget/subscription-button.js",
       attr: "data-subscription_button_id",
-      value: "pl_U3j7jxWKI2EYkP",
+      value: "pl_U4rfjtxGFWrzza",
       theme: "rzp-dark-standard",
     },
     quarterly: {
       scriptSrc: "https://checkout.razorpay.com/v1/payment-button.js",
       attr: "data-payment_button_id",
-      value: "pl_U3jFhA2llC8TsR",
+      value: "pl_U4rVmbmdM7Iqxf",
     },
   } as Record<string, PlanButton>,
   loading: "Loading the scheduler…",
